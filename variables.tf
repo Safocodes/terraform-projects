@@ -40,3 +40,8 @@ variable "private_data_subnet_az2_cidr" {
 
 }
 
+variable "local_ip" {
+  type    = string
+  default = "98.46.115.207/32"
+
+}
