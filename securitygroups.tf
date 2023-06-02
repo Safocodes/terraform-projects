@@ -19,14 +19,14 @@ resource "aws_security_group" "alb_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    egress {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
 
-    }
-  
+  }
+
   tags = {
     Name = " alb security group "
   }
@@ -45,14 +45,14 @@ resource "aws_security_group" "ssh_security_group" {
     protocol    = "tcp"
     cidr_blocks = [var.local_ip]
   }
-    egress {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
 
-    }
-  
+  }
+
   tags = {
     Name = " ssh security group "
   }
@@ -116,15 +116,15 @@ resource "aws_security_group" "database_security_group" {
     protocol        = "tcp"
     security_groups = [aws_security_group.webserver_security_group.id]
   }
-    egress {
-      from_port   = 0
-      to_port     = 0
-      protocol    = "-1"
-      cidr_blocks = ["0.0.0.0/0"]
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
 
-    }
-
-    tags = {
-      Name = "database security group"
-    }
   }
+
+  tags = {
+    Name = "database security group"
+  }
+}

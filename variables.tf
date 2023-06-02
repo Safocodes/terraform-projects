@@ -45,3 +45,22 @@ variable "local_ip" {
   default = "98.46.115.207/32"
 
 }
+
+variable "db_username" {
+  description = "Username for the database"
+  type        = string
+
+}
+
+variable "db_password" {
+  description = "password for the database"
+  type        = string
+
+}
+
+variable "dbinstanceidentifier" {
+  description = "database instance name"
+  type        = string
+  default     = "dev-rds.db"
+
+}
