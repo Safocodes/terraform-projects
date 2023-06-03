@@ -1,7 +1,11 @@
 resource "aws_security_group" "alb_security_group" {
-  name        = " alb security group "
-  description = "Allow alb inbound traffic"
-  vpc_id      = aws_vpc.vpc.id
+  name_prefix            = "alb-security-group"
+  description            = "Allow alb inbound traffic"
+  vpc_id                 = aws_vpc.vpc.id
+  revoke_rules_on_delete = true
+  lifecycle {
+    create_before_destroy = true
+  }
 
   ingress {
     description = "Http from VPC"
@@ -19,6 +23,7 @@ resource "aws_security_group" "alb_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -27,16 +32,20 @@ resource "aws_security_group" "alb_security_group" {
 
   }
 
+
   tags = {
     Name = " alb security group "
   }
 }
 
-
 resource "aws_security_group" "ssh_security_group" {
-  name        = " ssh security group "
-  description = "Allow ssh inbound traffic"
-  vpc_id      = aws_vpc.vpc.id
+  name_prefix            = " ssh-security-group "
+  description            = "Allow ssh inbound traffic"
+  vpc_id                 = aws_vpc.vpc.id
+  revoke_rules_on_delete = true
+  lifecycle {
+    create_before_destroy = true
+  }
 
   ingress {
     description = "ssh from VPC"
@@ -60,9 +69,13 @@ resource "aws_security_group" "ssh_security_group" {
 
 
 resource "aws_security_group" "webserver_security_group" {
-  name        = "webserver security group "
-  description = "Allow webserver inbound traffic"
-  vpc_id      = aws_vpc.vpc.id
+  name_prefix            = "webserver security group "
+  description            = "Allow webserver inbound traffic"
+  vpc_id                 = aws_vpc.vpc.id
+  revoke_rules_on_delete = true
+  lifecycle {
+    create_before_destroy = true
+  }
 
   ingress {
     description     = "Http from VPC"
@@ -99,15 +112,19 @@ resource "aws_security_group" "webserver_security_group" {
   }
 
   tags = {
-    Name = " webserver security group "
+    Name = "webserver security group "
   }
 }
 
 
 resource "aws_security_group" "database_security_group" {
-  name        = "database security group "
-  description = "Allow inbound traffic"
-  vpc_id      = aws_vpc.vpc.id
+  name_prefix            = "database security group "
+  description            = "Allow inbound traffic"
+  vpc_id                 = aws_vpc.vpc.id
+  revoke_rules_on_delete = true
+  lifecycle {
+    create_before_destroy = true
+  }
 
   ingress {
     description     = "enable inbound on port 3306"
